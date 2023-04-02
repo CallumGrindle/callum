@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticPaths } from "next";
 import { remark } from "remark";
 import html from "remark-html";
 import fs from "fs";
@@ -30,9 +30,7 @@ export const getStaticPaths: GetStaticPaths<EssayParams> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<EssayProps, EssayParams> = async ({
-  params,
-}) => {
+export const getStaticProps = async ({ params }: { params: EssayParams }) => {
   const essayPath = path.join(process.cwd(), "essays", `${params?.essay}.md`);
 
   const fileContents = fs.readFileSync(essayPath, "utf8");
